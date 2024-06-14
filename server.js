@@ -3,7 +3,7 @@ import path from 'path'
 const app = express();
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-import router from '../routes/index.js';
+import router from './routes/index.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors'
