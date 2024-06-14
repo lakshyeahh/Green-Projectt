@@ -1,25 +1,33 @@
 import express from 'express';
+import path from 'path'
 const app = express();
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 import router from './routes/index.js';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from 'cors'
+
+
+
 dotenv.config();
+app.use(cors(
+  {
+      origin: ["https://deploy-mern-frontend.vercel.app"],
+      methods: ["POST", "GET", "PUT", "PATCH", 'DELETE'],
+      credentials: true
+  }
+));
 app.use(express.json())
 
-const PORT = process.env.PORT || 6000
+const PORT = process.env.PORT || 4000
 
-app.get("/", function (req,res){
-  res.sendFile(
-  path.join(__dirname,"../frontend/build/index.html"),
-  function (err) {
-    if (err) {
-   res.status(500).send(err);
-    }
-  }
-);
-});
+
 
 //routes
+app.get("/", (req, res) => {
+  res.json("Hello");
+})
 app.use('/api', router)
 
 
